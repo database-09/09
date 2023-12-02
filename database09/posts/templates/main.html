@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>main</title>
+</head>
+<body>
+    <div class="box">
+        <img src="{% static 'icons/bear.jpg' %}" alt="프로필" class="profile">
+    </div>
+    <header class="header">
+        
+        <div class="f">
+           
+            <form method="GET" action="{% url 'posts:search' %}" class="search-container">
+                
+                <div class="search-input">
+                    <input type="text" name="search" placeholder="검색어를 입력해주세요" value="{{ search_query }}">
+                </div>
+               
+                
+                <div class="chart">
+                    <select name='sort' id='sort'>
+                        <option value="price" {% if sort == 'price' %}selected{% endif %}>가격 낮은순</option>
+                        <option value="recently" {% if sort == 'recently' %}selected{% endif %}>최신순</option>
+                        <option value="likes" {% if sort == 'likes' %}selected{% endif %}>인기순</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit" value="">정렬</button>
+                </div>
+            </form>
+    
+    </header>
+   
+        {% for post in posts %}
+        <div class="item">
+            <img src="..\static\icons\Plus.png" alt="이미지" class="ex_img">
+            <div class="num">수량 <br>{{ post.number }}</div>
+            <div class="contain3">
+                <div class="item_box">
+                    <div class="heart" id="like">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+                    </div>
+                        <div class="item_name">{{ post.title }}</div>
+                </div>
+                <div class="contain2">
+                    <div class="per_price">
+                        <div>1인당 예상 금액</div>
+                        <div id="est_price">{{ post.sales }}</div>
+                    </div>
+                    <div  class="human_part">
+                        <img src="{% static 'icons/Vector.svg' %}" alt="사람" class="human">
+                        <div class="part">8/{{ post.number }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+    <div class="item">
+            <img src="{% static 'icons/bear.jpg' %}" alt="예시사진" class="ex_img">
+            <div class="num">수량 <br>3</div>
+            <div class="contain3">
+            <div class="item_box">
+                <div class="heart" id="like">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+                </div>
+                    <div class="item_name">스팸</div>
+            </div>
+            <div class="contain2">
+            <div class="per_price">
+                <div>1인당 예상 금액</div>
+                <div id="est_price">8000원</div>
+            </div>
+            <div  class="human_part">
+                <img src="{% static 'icons/Vector.svg' %}" alt="사람" class="human">
+                <div class="part">8/10</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    
+    <div class="item">
+            <img src="{% static 'icons/bear.jpg' %}" alt="예시사진" class="ex_img">
+            <div class="num">수량 <br>10</div>
+            <div class="contain3">
+            <div class="item_box">
+                <div class="heart" id="like">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+                </div>
+                    <div class="item_name">사탕</div>
+            </div>
+            <div class="contain2">
+                <div class="per_price">
+                <div>1인당 예상 금액</div>
+                <div id="est_price">200원</div>
+            </div>
+            <div  class="human_part">
+                <img src="{% static 'icons/Vector.svg' %}" alt="사람" class="human">
+                <div class="part">4/6</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <button class="write_botton">
+        <a href="http://127.0.0.1:8000/posts/new">
+        <img src="{% static 'icons/Group 1.svg' %}" alt="글쓰기" class="write">
+        </a>
+        
+    </button>
+
+    <script>
+        
+        // 좋아요
+        var btn = document.getElementById("like")
+      
+        btn.addEventListener('click',function(){
+                  btn.classList.toggle('active')
+          })
+        // 정렬버튼
+          var array1 = document.getElementById("array_botton1")
+      
+          array1.addEventListener('click',function(){
+            array1.classList.toggle('active')
+          }) 
+
+
+      </script>
+</body>
+</html>
